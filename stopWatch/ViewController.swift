@@ -10,16 +10,94 @@ import UIKit
 
 class ViewController: UIViewController {
 
+    @IBOutlet weak var startButton: UIButton!
+    @IBOutlet weak var timeLabel: UILabel!
+    var time = 0
+    
+    //Timer
+    var timer = Timer()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        
+        timeLabel.textColor = .white
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    @IBAction func startTapped(_ sender: Any) {
+        startButton.isEnabled = false
+        timer = Timer.scheduledTimer(timeInterval: 1.00, target: self, selector: #selector(ViewController.action), userInfo: nil, repeats: true)
+        }
+
+    @IBAction func pauseTapped(_ sender: Any) {
+        startButton.isEnabled = true
+        startButton.setTitle("Resume", for: .normal)
+        timer.invalidate()
     }
-
-
+    
+    @IBAction func resetTapped(_ sender: Any) {
+        startButton.isEnabled = true
+        startButton.setTitle("Start", for: .normal)
+        timer.invalidate()
+        time = 0
+        timeLabel.text = ("0")
+    }
+    
+    
+    func action(){
+        time += 1
+        timeLabel.text = String(time)
+    }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
